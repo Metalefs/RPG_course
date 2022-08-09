@@ -19,10 +19,11 @@ namespace RPG.SceneManagement
         private IEnumerator Transition()
         {
             DontDestroyOnLoad(gameObject);
-            yield return new WaitForSeconds(1f);
+            yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            //yield return new WaitForSeconds(1f);
             //SavingWrapper wrapper = FindObjectOfType<SavingWrapper>();
             //wrapper.Save();
-            SceneManager.LoadScene(sceneToLoad);
+            //SceneManager.LoadScene(sceneToLoad);
             //wrapper.Load();
             Destroy(gameObject);
         }
