@@ -1,3 +1,4 @@
+using RPG.Core;
 using UnityEngine;
 namespace RPG.Combat
 {
@@ -9,33 +10,49 @@ namespace RPG.Combat
         [SerializeField] public float weaponDamage = 5f;
         [SerializeField] public GameObject weaponPrefab = null;
         [SerializeField] public AnimatorOverrideController animatorOverride;
+        [SerializeField] public bool isRightHanded = true;
 
-        public void Spawn(Transform RPosition, Transform LPosition, Animator animator)
+         [SerializeField] Projectile projectile = null;
+
+        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
         {
             if (weaponPrefab != null)
             {
-                Instantiate(weaponPrefab, RPosition);
-
-                weaponPrefab.transform.localPosition = Vector3.zero;
-                weaponPrefab.transform.localRotation = Quaternion.identity;
+                Transform handTransform = GetTransform(rightHand, leftHand);
+                Instantiate(weaponPrefab, handTransform);
             }
             if (animatorOverride != null)
-                animator.runtimeAnimatorController = animatorOverride;
+            {
+                animator.runtimeAnimatorController = animatorOverride; 
+            }
         }
 
-        public float GetTimeBetweenAttacks()
+        private Transform GetTransform(Transform rightHand, Transform leftHand)
         {
-            return timeBetweenAttacks;
+            Transform handTransform;
+            if (isRightHanded) handTransform = rightHand;
+            else handTransform = leftHand;
+            return handTransform;
         }
 
-        public float GetWeaponRange()
+        public bool HasProjectile()
         {
-            return weaponRange;
+            return projectile != null;
         }
 
-        public float GetWeaponDamage()
+        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target)
+        {
+            Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
+            projectileInstance.SetTarget(target);
+        }
+
+        public float GetDamage()
         {
             return weaponDamage;
+        }
+        public float GetRange()
+        {
+            return weaponRange;
         }
     }
 }

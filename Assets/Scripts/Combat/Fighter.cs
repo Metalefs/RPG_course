@@ -66,11 +66,26 @@ namespace RPG.Combat
         void Hit()
         {
             if(target == null) return;
-            target.TakeDamage(CurrentWeapon.GetWeaponDamage());
+            
+            if (CurrentWeapon.HasProjectile())
+            {
+                CurrentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target);
+            }
+            else
+            {
+                target.TakeDamage(CurrentWeapon.GetDamage());
+            }
         }
+
+        // Animation Event
+        void Shoot()
+        {
+            Hit();
+        }
+
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) < CurrentWeapon.GetWeaponRange();
+            return Vector3.Distance(transform.position, target.transform.position) < CurrentWeapon.GetRange();
         }
         public bool CanAttack(GameObject combatTarget)
         {
