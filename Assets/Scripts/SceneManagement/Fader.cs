@@ -5,15 +5,19 @@ using UnityEngine;
 public class Fader : MonoBehaviour
 {
     CanvasGroup canvasGroup;
-    void Start()
+    void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+    }
+    public IEnumerator FadeOutImmediate()
+    {
+        canvasGroup.alpha = 1;
+        yield return null;
     }
     public IEnumerator FadeOut(float time)
     {
         while (canvasGroup.alpha < 1)
         {
-            Debug.Log(canvasGroup.alpha);
             canvasGroup.alpha += Time.deltaTime / time;
             yield return null;
         }
@@ -22,7 +26,6 @@ public class Fader : MonoBehaviour
     {
         while (canvasGroup.alpha > 0)
         {
-            Debug.Log(canvasGroup.alpha);
             canvasGroup.alpha -= Time.deltaTime / time;
             yield return null;
         }

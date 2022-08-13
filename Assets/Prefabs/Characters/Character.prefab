@@ -17,7 +17,8 @@ GameObject:
   - component: {fileID: 5507246911908057370}
   - component: {fileID: 6541642807235224355}
   - component: {fileID: 546587225542702573}
-  - component: {fileID: 3075608880446245471}
+  - component: {fileID: 3613757190800563074}
+  - component: {fileID: 1265091618444416501}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -137,6 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6dbdaecffa91c84e9928c2522da0b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 6
 --- !u!114 &7242547507142677754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,6 +166,10 @@ MonoBehaviour:
   weaponRange: 2
   timeBetweenAttacks: 1
   weaponDamage: 5
+  rightHandTransform: {fileID: 0}
+  leftHandTransform: {fileID: 0}
+  DefaultWeapon: {fileID: 0}
+  CurrentWeapon: {fileID: 0}
 --- !u!114 &6541642807235224355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8744e3a54724aba4eafc4572c8cf715b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3075608880446245471
+--- !u!114 &3613757190800563074
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -197,10 +203,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 578106288379364833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eebd192cedb91294f9b1760aafa9b355, type: 3}
+  m_Script: {fileID: 11500000, guid: 675661f6bfabb924fa442adb854b04ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+--- !u!114 &1265091618444416501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578106288379364833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 
 --- !u!1 &4433910694644268914
 GameObject:
   m_ObjectHideFlags: 0
