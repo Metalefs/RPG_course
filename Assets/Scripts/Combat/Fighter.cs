@@ -40,12 +40,15 @@ namespace RPG.Combat
             }
         }
 
-        public void EquipWeapon(Weapon weapon)
+        public void EquipWeapon(Weapon weapon, WeaponPickup weaponPickup = null)
         {
+            if(CurrentWeapon?.weaponPickupPrefab != null)
+            {
+                weaponPickup?.DropWeaponPickup(CurrentWeapon.weaponPickupPrefab);
+            }
             CurrentWeapon = weapon;
             CurrentWeapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
         }
-
 
        private void AttackBehaviour()
         {

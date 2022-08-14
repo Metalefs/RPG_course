@@ -33,10 +33,10 @@ namespace RPG.Combat
 
         void Update()
         {
-            //if (target != null && isHoming && !target.IsDead)
-            //{
-            //    transform.LookAt(GetAimLocation());
-            //}
+            if (target != null && isHoming && !target.IsDead)
+            {
+                transform.LookAt(GetAimLocation());
+            }
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
 
@@ -52,7 +52,7 @@ namespace RPG.Combat
 
         public void SetTarget(GameObject instigator, float damage, Health target = null, Vector3 targetPoint = default)
         {
-            //this.target = target;
+            this.target = target;
             this.targetPoint = targetPoint;
             this.damage = damage;
             this.instigator = instigator;
@@ -77,10 +77,10 @@ namespace RPG.Combat
         private void OnTriggerEnter(Collider other)
         {
             Health health = other.GetComponent<Health>();
-            if (target != null && health != target) return;
+            //if (target != null && health != target) return;
             if (health == null || health.IsDead) return;
             if (other.gameObject == instigator) return;
-            //health.TakeDamage(instigator, damage);
+            health.TakeDamage(/*instigator,*/ damage);
 
             speed = 0;
 
@@ -93,7 +93,7 @@ namespace RPG.Combat
 
             foreach (GameObject toDestroy in destroyOnHit)
             {
-                Destroy(toDestroy);
+                Destroy(toDestroy, .5f);
             }
 
             Destroy(gameObject, lifeAfterImpact);

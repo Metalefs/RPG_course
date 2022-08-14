@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7529090229626904821}
-  - component: {fileID: 829518691664136314}
   - component: {fileID: 4503963039958024577}
+  - component: {fileID: 75540717003221058}
   m_Layer: 0
   m_Name: BowPickup
   m_TagString: Untagged
@@ -34,19 +34,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!65 &829518691664136314
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4618336658788346113}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.44847715, y: 1.5641749, z: 0.0662314}
-  m_Center: {x: 0.2023961, y: 0.76830405, z: 0.0111743715}
 --- !u!114 &4503963039958024577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,8 +46,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a579c2a89a814974c9dd555b1917d9ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: e8e24ae13ad9f5145afa33a4de70158d, type: 2}
+  weapon: {fileID: 11400000, guid: 3eece0eb353fc944bbc7694b984f731f, type: 2}
   destroyDelay: 0
+  enableDelay: 2
+--- !u!135 &75540717003221058
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618336658788346113}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.68
+  m_Center: {x: 0, y: 0.77, z: 0}
 --- !u!1001 &6173234589707408960
 PrefabInstance:
   m_ObjectHideFlags: 0
