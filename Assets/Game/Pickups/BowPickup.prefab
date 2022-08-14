@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7529090229626904821}
   - component: {fileID: 4503963039958024577}
   - component: {fileID: 75540717003221058}
+  - component: {fileID: 6205358519568478961}
   m_Layer: 0
   m_Name: BowPickup
   m_TagString: Untagged
@@ -62,6 +63,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.68
   m_Center: {x: 0, y: 0.77, z: 0}
+--- !u!114 &6205358519568478961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618336658788346113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 
 --- !u!1001 &6173234589707408960
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Saving;
 using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class WeaponPickup : MonoBehaviour
+    public class WeaponPickup : MonoBehaviour, ISaveable
     {
         [SerializeField] Weapon weapon = null;
         [SerializeField] float destroyDelay = 0f;
         [SerializeField] float enableDelay = 2f;
-        bool hasPickedUp = false;
+        public bool hasPickedUp = false;
+        public bool IsClone = false;
 
         void Start()
         {
@@ -38,16 +40,31 @@ namespace RPG.Combat
             Destroy(gameObject, destroyDelay);
         }
 
-        public void DropWeaponPickup(GameObject weaponPickupPrefab)
+        public void DropWeaponPickup(WeaponPickup weaponPickupPrefab)
         {
             //DROP OLD WEAPON 1 METER AWAY FROM PLAYER
             Vector3 dropPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             //instantiate the weapon pickup prefab
-            GameObject weaponPickup = Instantiate(weaponPickupPrefab, dropPosition, Quaternion.identity);
+            WeaponPickup weaponPickup = Instantiate(weaponPickupPrefab, dropPosition, Quaternion.identity);
         }        
         
         void OnDrawGizmos() {
             Gizmos.DrawWireSphere(transform.position, 1);
+        }
+
+        public object CaptureState()
+        {
+            return IsClone;
+        }
+
+        public void RestoreState(object state)
+        {
+            IsClone = (bool)state;
+            Debug.Log("IsClone: " + IsClone+ " " + gameObject.name);
+            if (IsClone)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

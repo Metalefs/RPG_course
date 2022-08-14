@@ -9,7 +9,7 @@ namespace RPG.Combat
         [SerializeField] public float weaponRange = 2f;
         [SerializeField] public float weaponDamage = 5f;
         [SerializeField] public GameObject weaponPrefab = null;
-        [SerializeField] public GameObject weaponPickupPrefab = null;
+        [SerializeField] public WeaponPickup weaponPickupPrefab = null;
         [SerializeField] public AnimatorOverrideController animatorOverride;
         [SerializeField] public bool isRightHanded = true;
 

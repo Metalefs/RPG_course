@@ -1,9 +1,11 @@
 using UnityEngine;using RPG.Movement;
 using RPG.Interfaces;
 using RPG.Core;
+using RPG.Saving;
+
 namespace RPG.Combat
 {
-    public class Fighter : IAction
+    public class Fighter : IAction, ISaveable
     {
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
@@ -21,7 +23,10 @@ namespace RPG.Combat
         private void Start()
         {
             health = GetComponent<Health>();
-            EquipWeapon(DefaultWeapon);
+            if(CurrentWeapon == null)
+            {
+                EquipWeapon(DefaultWeapon);
+            }
         }
         
         private void Update()
@@ -111,6 +116,18 @@ namespace RPG.Combat
         {
             GetComponent<Animator>().ResetTrigger("attack");
             GetComponent<Animator>().SetTrigger("stopAttack");
+        }
+
+        public object CaptureState()
+        {
+            return CurrentWeapon.name;
+        }
+
+        public void RestoreState(object state)
+        {
+            string weaponName = (string)state;
+            Weapon weapon = Resources.Load(weaponName, typeof(Weapon)) as Weapon;
+            EquipWeapon(weapon);
         }
     }
 }

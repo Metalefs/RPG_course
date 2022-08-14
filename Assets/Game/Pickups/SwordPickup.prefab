@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5625053056243762059}
   - component: {fileID: 195200017873841112}
   - component: {fileID: 5060698669638999737}
+  - component: {fileID: 4274763748058612067}
   m_Layer: 0
   m_Name: SwordPickup
   m_TagString: Untagged
@@ -60,6 +61,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 69cf302fd1905a148ac8d4ab5988552b, type: 2}
+  destroyDelay: 0
+  enableDelay: 2
+--- !u!114 &4274763748058612067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5625053056243762056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 
 --- !u!1001 &8259432375872189081
 PrefabInstance:
   m_ObjectHideFlags: 0
