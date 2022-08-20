@@ -15,6 +15,14 @@ PrefabInstance:
       propertyPath: DefaultWeapon
       value: 
       objectReference: {fileID: 11400000, guid: 95b2fd8bf2f1bab418858fabbd1e1180, type: 2}
+    - target: {fileID: 4955255389972379564, guid: 545b203da0a797e459d0ea015f8e6f69, type: 3}
+      propertyPath: characterClass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7758941731942821661, guid: 545b203da0a797e459d0ea015f8e6f69, type: 3}
+      propertyPath: characterClass
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8369901985780132086, guid: 545b203da0a797e459d0ea015f8e6f69, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -2,20 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using RPG.Interfaces;
-public class ActionScheduler : MonoBehaviour
+namespace RPG.Core
 {
-    IAction currentAction;
-    public void StartAction(IAction action)
+    public class ActionScheduler : MonoBehaviour
     {
-        if (currentAction == action) return;
-        if (currentAction != null)
-            currentAction.Cancel();
-        
-        currentAction = action;
+        IAction currentAction;
+        public void StartAction(IAction action)
+        {
+            if (currentAction == action) return;
+            if (currentAction != null)
+                currentAction.Cancel();
+
+            currentAction = action;
+        }
+
+        public void CancelCurrentAction()
+        {
+            StartAction(null);
+        }
     }
 
-    public void CancelCurrentAction()
-    {
-        StartAction(null);
-    }
 }

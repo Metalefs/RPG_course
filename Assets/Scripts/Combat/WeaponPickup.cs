@@ -42,7 +42,7 @@ namespace RPG.Combat
 
         public void DropWeaponPickup(WeaponPickup weaponPickupPrefab)
         {
-            //DROP OLD WEAPON 1 METER AWAY FROM PLAYER
+            //DROP OLD WEAPON
             Vector3 dropPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             //instantiate the weapon pickup prefab
             WeaponPickup weaponPickup = Instantiate(weaponPickupPrefab, dropPosition, Quaternion.identity);
@@ -60,7 +60,6 @@ namespace RPG.Combat
         public void RestoreState(object state)
         {
             IsClone = (bool)state;
-            Debug.Log("IsClone: " + IsClone+ " " + gameObject.name);
             if (IsClone)
             {
                 Destroy(gameObject);
