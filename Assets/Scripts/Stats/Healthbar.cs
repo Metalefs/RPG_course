@@ -24,7 +24,7 @@ namespace RPG.Stats
         void Update()
         {
             float prevFill = healthbar.fillAmount;
-            float currFill = health.health / stats.GetHealth();
+            float currFill = health.health / stats.GetStat(Stat.Health);
             if(currFill > prevFill) prevFill = Mathf.Min(prevFill + fillSmoothness, currFill);
             else if (currFill < prevFill) prevFill = Mathf.Max(prevFill - fillSmoothness, currFill);
             healthbar.fillAmount = prevFill;

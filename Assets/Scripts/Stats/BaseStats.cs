@@ -19,12 +19,16 @@ namespace RPG.Stats
             }
             else
             {
-                //SetLevel(startingLevel);
+                SetLevel(startingLevel);
             }
         }
-        public float GetHealth()
+        public float GetStat(Stat stat)
         {
-            return progression.GetHealth(characterClass, startingLevel);
+            return progression.GetStat(stat, characterClass, startingLevel);
+        }
+        private void SetLevel(int level)
+        {
+            progression.SetLevel(level);
         }
     }
 }

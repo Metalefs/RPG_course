@@ -33,7 +33,7 @@ public class EnemyHealthbar : MonoBehaviour
 
 
         float prevFill = healthbar.fillAmount;
-        float currFill = enemy.health / stats.GetHealth();
+        float currFill = enemy.health / stats.GetStat(Stat.Health);
         if (currFill > prevFill) prevFill = Mathf.Min(prevFill + fillSmoothness, currFill);
         else if (currFill < prevFill) prevFill = Mathf.Max(prevFill - fillSmoothness, currFill);
         healthbar.fillAmount = prevFill;
