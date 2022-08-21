@@ -7,13 +7,16 @@ namespace RPG.Attributes
     [RequireComponent(typeof(BaseStats))]
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] public float health;
+        public float health = -1f;
         bool isDead = false;
 
         public bool IsDead { get { return isDead; } }
 
         private void Start() {
-            health = GetComponent<BaseStats>().GetStat(Stat.Health);
+            if(health < 0)
+            {
+                health = GetComponent<BaseStats>().GetStat(Stat.Health);
+            }
         }
 
         public object CaptureState()

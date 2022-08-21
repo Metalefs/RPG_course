@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using RPG.Saving;
 using UnityEngine;
 
@@ -8,11 +7,17 @@ namespace RPG.Stats
     public class Experience : MonoBehaviour, ISaveable
     {
         [SerializeField] float experiencePoints = 0;
+        public event Action onExperienceGained;
         
         public void AddExperience(float experience)
         {
             experiencePoints += experience;
-            Debug.Log(experiencePoints);
+            onExperienceGained();
+        }
+
+        public float GetPoints()
+        {
+            return experiencePoints;
         }
 
         object ISaveable.CaptureState()
