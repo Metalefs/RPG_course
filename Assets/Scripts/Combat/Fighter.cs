@@ -18,7 +18,7 @@ namespace RPG.Combat
 
         
         float timeSinceLastAttack = Mathf.Infinity;
-        Health target;
+        Health target = null;
         Health health;
 
         private void Start()
@@ -108,6 +108,12 @@ namespace RPG.Combat
             GetComponent<ActionScheduler>().StartAction(this);
             target = combatTarget?.GetComponent<Health>();
         }
+
+        public Health GetTarget()
+        {
+            return target;
+        }
+
         public override void Cancel()
         {
             StopAttack();

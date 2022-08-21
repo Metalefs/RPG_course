@@ -7,7 +7,7 @@ namespace RPG.Attributes
     [RequireComponent(typeof(BaseStats))]
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] float health;
+        [SerializeField] public float health;
         bool isDead = false;
 
         public bool IsDead { get { return isDead; } }
