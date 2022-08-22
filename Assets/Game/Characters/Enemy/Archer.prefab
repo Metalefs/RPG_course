@@ -281,7 +281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3613757190800563074, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
       propertyPath: health
-      value: 100
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 4100140005155134138, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
       propertyPath: progression

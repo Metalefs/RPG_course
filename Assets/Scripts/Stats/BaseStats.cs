@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 namespace RPG.Stats
 {
@@ -9,6 +10,8 @@ namespace RPG.Stats
         [SerializeField] Progression progression = null;
         [SerializeField] GameObject levelUpParticle = null;
         [SerializeField] AudioClip levelUpSFX = null;
+
+        public event Action onLevelUp;
         int currentLevel = 0;
 
         private void Start()
@@ -21,17 +24,12 @@ namespace RPG.Stats
             }
         }
 
-        private void UpdateLevel()
+        public float GetStat(Stat stat)
         {
-            int newLevel = CalculateLevel();
-            if (newLevel > currentLevel)
-            {
-                currentLevel = newLevel;
-                print("Levelled Up!");
-            }
+            return progression.GetStat(stat, characterClass, currentLevel) + GetAdditiveModifier(stat);
         }
 
-        public int CalculateLevel()
+        private int CalculateLevel()
         {
             Experience experience = GetComponent<Experience>();
             if (experience == null) return startingLevel;
@@ -48,9 +46,37 @@ namespace RPG.Stats
             return penultimateLevel + 1;
         }
 
-        public float GetStat(Stat stat)
+        private void UpdateLevel()
         {
-            return progression.GetStat(stat, characterClass, currentLevel);
+            int newLevel = CalculateLevel();
+            if (newLevel > currentLevel)
+            {
+                currentLevel = newLevel;
+                LevelUpEffect();
+                onLevelUp();
+            }
         }
+
+        private void LevelUpEffect()
+        {
+            Instantiate(levelUpParticle, transform);
+            if (levelUpSFX != null)
+                AudioSource.PlayClipAtPoint(levelUpSFX, Camera.main.transform.position);
+        }
+
+        private float GetAdditiveModifier(Stat stat)
+        {
+            if (stat == Stat.ExperienceToLevelUp) return 0;
+            float total = 0;
+            foreach (IModifierProvider provider in GetComponents<IModifierProvider>())
+            {
+                foreach(float modifier in provider.GetAdditiveModifier(stat))
+                {
+                    total += modifier;
+                }
+            }
+            return total;
+        }
+
     }
 }

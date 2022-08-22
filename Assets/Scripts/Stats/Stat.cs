@@ -8,6 +8,8 @@ namespace RPG.Stats
     {
         Health,
         ExperienceReward,
-        ExperienceToLevelUp
+        ExperienceToLevelUp,
+        Damage,
+        Strength,
     }
 }

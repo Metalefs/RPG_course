@@ -7,16 +7,26 @@ namespace RPG.Attributes
     [RequireComponent(typeof(BaseStats))]
     public class Health : MonoBehaviour, ISaveable
     {
+        [SerializeField] float regenerationPercentage = 70;
         public float health = -1f;
         bool isDead = false;
 
         public bool IsDead { get { return isDead; } }
+        public delegate void OnDamageTaken(GameObject instigator);
+        public event OnDamageTaken onDamageTaken;
 
         private void Start() {
             if(health < 0)
             {
                 health = GetComponent<BaseStats>().GetStat(Stat.Health);
             }
+            GetComponent<BaseStats>().onLevelUp += RegenerateHealth;
+        }
+
+        void RegenerateHealth()
+        {
+            float regenHealth = GetComponent<BaseStats>().GetStat(Stat.Health) * (regenerationPercentage / 100);
+            health = Mathf.Max(health, regenHealth);
         }
 
         public object CaptureState()
@@ -41,6 +51,7 @@ namespace RPG.Attributes
                 Die();
                 AwardExperience(instigator);
             }
+            onDamageTaken?.Invoke(instigator);
         }
 
         private void Die()

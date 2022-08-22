@@ -918,7 +918,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 01b2546c969fe814794af634cb4534f4, type: 2}
     - target: {fileID: 5621794282020615828, guid: 545b203da0a797e459d0ea015f8e6f69, type: 3}
       propertyPath: health
-      value: 80
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7902839907573528803, guid: 545b203da0a797e459d0ea015f8e6f69, type: 3}
       propertyPath: uniqueIdentifier
@@ -1106,7 +1106,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8134453, y: 1}
+    m_SensorSize: {x: 1.4913044, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1472,7 +1472,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757710447}
-  m_LocalRotation: {x: 0.09973449, y: -0.032878496, z: 0.0032973706, w: 0.9944653}
+  m_LocalRotation: {x: 0.09973452, y: -0.032878526, z: 0.0032973744, w: 0.9944653}
   m_LocalPosition: {x: 12.863209, y: 54.474857, z: 33.756493}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1510,7 +1510,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8134453, y: 1}
+    m_SensorSize: {x: 1.4913044, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3082,7 +3082,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.8134453, y: 1}
+    m_SensorSize: {x: 1.4913044, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3864,7 +3864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3276682627051642042, guid: e9c133fd689ab2b4aaff8d43bc48b0cf, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7310925
+      value: 1.4913044
       objectReference: {fileID: 0}
     - target: {fileID: 4664578437338756793, guid: e9c133fd689ab2b4aaff8d43bc48b0cf, type: 3}
       propertyPath: uniqueIdentifier

@@ -3,10 +3,12 @@ using RPG.Interfaces;
 using RPG.Attributes;
 using RPG.Saving;
 using RPG.Core;
+using RPG.Stats;
+using System.Collections.Generic;
 
 namespace RPG.Combat
 {
-    public class Fighter : IAction, ISaveable
+    public class Fighter : IAction, ISaveable, IModifierProvider
     {
         [SerializeField] float weaponRange = 2f;
         [SerializeField] float timeBetweenAttacks = 1f;
@@ -20,10 +22,12 @@ namespace RPG.Combat
         float timeSinceLastAttack = Mathf.Infinity;
         Health target = null;
         Health health;
+        BaseStats stats;
 
         private void Start()
         {
             health = GetComponent<Health>();
+            stats = GetComponent<BaseStats>();
             if(CurrentWeapon == null)
             {
                 EquipWeapon(DefaultWeapon);
@@ -75,15 +79,18 @@ namespace RPG.Combat
         void Hit()
         {
             if(target == null) return;
-            
+            float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
             if (CurrentWeapon.HasProjectile())
             {
-                CurrentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
+                CurrentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             }
             else
             {
-                target.TakeDamage(gameObject, CurrentWeapon.GetDamage());
+                target.TakeDamage(gameObject, damage + stats.GetStat(Stat.Strength) * 0.65f);
             }
+            Debug.Log(damage);
+            Debug.Log(stats.GetStat(Stat.Strength) * 0.65f);
+            Debug.Log(damage + stats.GetStat(Stat.Strength) * 0.65f);
         }
 
         // Animation Event
@@ -125,6 +132,22 @@ namespace RPG.Combat
             GetComponent<Animator>().SetTrigger("stopAttack");
         }
 
+        public IEnumerable<float> GetAdditiveModifier(Stat stat)
+        {
+            if(stat == Stat.Damage)
+            {
+                yield return weaponDamage;
+            }
+        }
+
+        public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        {
+            if(stat == Stat.Damage)
+            {
+                yield return CurrentWeapon.GetPercentageBonus();
+            }
+        }
+
         public object CaptureState()
         {
             return CurrentWeapon.name;
@@ -136,5 +159,6 @@ namespace RPG.Combat
             Weapon weapon = Resources.Load(weaponName, typeof(Weapon)) as Weapon;
             EquipWeapon(weapon);
         }
+
     }
 }
