@@ -14,11 +14,14 @@ namespace RPG.Movement
         private Health Health;
         Ray lastRay;
 
-        private void Start()
-        {
-            Health = GetComponent<Health>();
+        private void Awake() {
             Agent = GetComponent<NavMeshAgent>();
             Animator = GetComponent<Animator>();
+            Health = GetComponent<Health>();
+        }
+
+        private void Start()
+        {
         }
 
         void Update()

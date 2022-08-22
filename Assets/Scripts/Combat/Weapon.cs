@@ -8,6 +8,7 @@ namespace RPG.Combat
         [SerializeField] public float timeBetweenAttacks = 1f;
         [SerializeField] public float weaponRange = 2f;
         [SerializeField] public float weaponDamage = 5f;
+        [SerializeField] public float percentageBonus = 0;
         [SerializeField] public GameObject weaponPrefab = null;
         [SerializeField] public WeaponPickup weaponPickupPrefab = null;
         [SerializeField] public AnimatorOverrideController animatorOverride;
@@ -74,7 +75,7 @@ namespace RPG.Combat
 
         public float GetPercentageBonus()
         {
-            return weaponDamage / 100;
+            return percentageBonus;
         }
 
         public float GetRange()
