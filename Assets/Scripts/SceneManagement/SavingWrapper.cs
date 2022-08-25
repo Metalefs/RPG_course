@@ -16,9 +16,9 @@ namespace RPG.SceneManagement
         }
 
         IEnumerator Wake(){
+            yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
             Fader fader = FindObjectOfType<Fader>();
             fader.FadeOutImmediate();
-            yield return GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile);
             yield return fader.FadeIn(fadeInTime);
         }
         void Update()

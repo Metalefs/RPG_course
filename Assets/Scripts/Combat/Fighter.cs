@@ -5,6 +5,7 @@ using RPG.Saving;
 using RPG.Core;
 using RPG.Stats;
 using System.Collections.Generic;
+using GameDevTV.Utils;
 
 namespace RPG.Combat
 {
@@ -16,7 +17,7 @@ namespace RPG.Combat
         [SerializeField] Transform rightHandTransform = null;
         [SerializeField] Transform leftHandTransform = null;
         [SerializeField] Weapon DefaultWeapon = null;
-        [SerializeField] Weapon CurrentWeapon = null;
+        [SerializeField] LazyValue<Weapon> CurrentWeapon;
 
         
         float timeSinceLastAttack = Mathf.Infinity;
@@ -24,14 +25,21 @@ namespace RPG.Combat
         Health health;
         BaseStats stats;
 
+        private void Awake(){
+            CurrentWeapon = new LazyValue<Weapon>(SetupDefaultWeapon);
+        }
+
+        private Weapon SetupDefaultWeapon(){
+            AttachWeapon(DefaultWeapon);
+            
+            return DefaultWeapon;
+        }
+
         private void Start()
         {
             health = GetComponent<Health>();
             stats = GetComponent<BaseStats>();
-            if(CurrentWeapon == null)
-            {
-                EquipWeapon(DefaultWeapon);
-            }
+            CurrentWeapon.ForceInit();
         }
         
         private void Update()
@@ -52,15 +60,20 @@ namespace RPG.Combat
 
         public void EquipWeapon(Weapon weapon, WeaponPickup weaponPickup = null)
         {
-            if(CurrentWeapon?.weaponPickupPrefab != null)
+            if (CurrentWeapon.value?.weaponPickupPrefab != null)
             {
-                weaponPickup?.DropWeaponPickup(CurrentWeapon.weaponPickupPrefab);
+                weaponPickup?.DropWeaponPickup(CurrentWeapon.value.weaponPickupPrefab);
             }
-            CurrentWeapon = weapon;
-            CurrentWeapon.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
+            AttachWeapon(weapon);
         }
 
-       private void AttackBehaviour()
+        private void AttachWeapon(Weapon weapon)
+        {
+            CurrentWeapon.value = weapon;
+            CurrentWeapon.value.Spawn(rightHandTransform, leftHandTransform, GetComponent<Animator>());
+        }
+
+        private void AttackBehaviour()
         {
             transform.LookAt(target.transform);
             if (timeSinceLastAttack > timeBetweenAttacks)
@@ -80,9 +93,9 @@ namespace RPG.Combat
         {
             if(target == null) return;
             float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
-            if (CurrentWeapon.HasProjectile())
+            if (CurrentWeapon.value.HasProjectile())
             {
-                CurrentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
+                CurrentWeapon.value.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             }
             else
             {
@@ -101,7 +114,7 @@ namespace RPG.Combat
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) < CurrentWeapon.GetRange();
+            return Vector3.Distance(transform.position, target.transform.position) < CurrentWeapon.value.GetRange();
         }
         public bool CanAttack(GameObject combatTarget)
         {
@@ -144,13 +157,13 @@ namespace RPG.Combat
         {
             if(stat == Stat.Damage)
             {
-                yield return CurrentWeapon.GetPercentageBonus();
+                yield return CurrentWeapon.value.GetPercentageBonus();
             }
         }
 
         public object CaptureState()
         {
-            return CurrentWeapon.name;
+            return CurrentWeapon.value.name;
         }
 
         public void RestoreState(object state)

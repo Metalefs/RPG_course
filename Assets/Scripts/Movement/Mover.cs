@@ -20,10 +20,6 @@ namespace RPG.Movement
             Health = GetComponent<Health>();
         }
 
-        private void Start()
-        {
-        }
-
         void Update()
         {
             Agent.enabled = !Health.IsDead;

@@ -20,7 +20,7 @@ public class EnemyHealthbar : MonoBehaviour
         playerFighter = GameObject.FindGameObjectWithTag("Player").GetComponent<Fighter>();
         healthbar = GetComponent<Image>();
         stats = enemy.GetComponent<BaseStats>();
-        currentHealth = enemy.health;
+        currentHealth = enemy.health.value;
         canvas.worldCamera = Camera.main;
     }
 
@@ -33,7 +33,7 @@ public class EnemyHealthbar : MonoBehaviour
 
 
         float prevFill = healthbar.fillAmount;
-        float currFill = enemy.health / stats.GetStat(Stat.Health);
+        float currFill = enemy.health.value / stats.GetStat(Stat.Health);
         if (currFill > prevFill) prevFill = Mathf.Min(prevFill + fillSmoothness, currFill);
         else if (currFill < prevFill) prevFill = Mathf.Max(prevFill - fillSmoothness, currFill);
         healthbar.fillAmount = prevFill;

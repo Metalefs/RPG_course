@@ -18,13 +18,13 @@ namespace RPG.Stats
             healthbar = GetComponent<Image>();
             health = GameObject.FindGameObjectWithTag("Player").GetComponent<Health>();
             stats = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseStats>();
-            currentHealth = health.health;
+            currentHealth = health.health.value;
         }
 
         void Update()
         {
             float prevFill = healthbar.fillAmount;
-            float currFill = health.health / stats.GetStat(Stat.Health);
+            float currFill = health.health.value / stats.GetStat(Stat.Health);
             if(currFill > prevFill) prevFill = Mathf.Min(prevFill + fillSmoothness, currFill);
             else if (currFill < prevFill) prevFill = Mathf.Max(prevFill - fillSmoothness, currFill);
             healthbar.fillAmount = prevFill;
