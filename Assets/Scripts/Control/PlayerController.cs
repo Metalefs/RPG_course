@@ -1,67 +1,115 @@
-using UnityEngine;
-using RPG.Movement;
 using RPG.Combat;
+using RPG.Movement;
+using UnityEngine;
 using RPG.Attributes;
+using System;
+
 namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        private Mover mover;
-        private Fighter fighter;
-        private Health health;
+        Health health;
 
-        private void Awake()
+        enum CursorType
         {
-            mover = GetComponent<Mover>();
-            fighter = GetComponent<Fighter>();
+            None,
+            Movement,
+            Combat,
+            Pickup,
+            SwordPickup,
+            BowPickup,
+            CastPickup
+        }
+
+        [System.Serializable]
+        struct CursorMapping
+        {
+            public CursorType type;
+            public Texture2D texture;
+            public Vector2 hotspot;
+        }
+
+        [SerializeField] CursorMapping[] cursorMappings = null;
+
+        private void Awake() {
             health = GetComponent<Health>();
         }
+
         private void Update()
         {
             if (health.IsDead) return;
-            if(InteractWithCombat()) return;
-            if(InteractWithMovement()) return;   
+
+            if (InteractWithCombat()) return;
+            if (InteractWithMovement()) return;
+
+            SetCursor(CursorType.None);
         }
 
-        private bool InteractWithCombat(){
+        private bool InteractWithCombat()
+        {
             RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
             foreach (RaycastHit hit in hits)
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
                 if (target == null) continue;
-                if (!GetComponent<Fighter>().CanAttack(target.gameObject)) continue;
-                if (Input.GetMouseButtonDown(0))
+
+                if (!GetComponent<Fighter>().CanAttack(target.gameObject))
+                {
+                    continue;
+                }
+
+                if (Input.GetMouseButton(0))
                 {
                     GetComponent<Fighter>().Attack(target.gameObject);
                 }
+                SetCursor(CursorType.Combat);
                 return true;
             }
             return false;
         }
 
-        private bool InteractWithMovement(){
-            if(Input.GetMouseButton(0)){
-                return MoveToCursor();
+        private bool InteractWithMovement()
+        {
+            RaycastHit hit;
+            bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
+            if (hasHit)
+            {
+                WeaponPickup pickup = hit.transform.GetComponent<WeaponPickup>();
+                
+                if (Input.GetMouseButton(0))
+                {
+                    GetComponent<Mover>().StartMoveAction(hit.point, 1f);
+                }
+                if (pickup != null)
+                    SetCursor(CursorType.Pickup);
+                else
+                    SetCursor(CursorType.Movement);
+                return true;
             }
             return false;
+        }
+
+        private void SetCursor(CursorType type)
+        {
+            CursorMapping mapping = GetCursorMapping(type);
+            Cursor.SetCursor(mapping.texture, mapping.hotspot, CursorMode.Auto);
+        }
+
+        private CursorMapping GetCursorMapping(CursorType type)
+        {
+            foreach (CursorMapping mapping in cursorMappings)
+            {
+                if (mapping.type == type)
+                {
+                    return mapping;
+                }
+            }
+            return cursorMappings[0];
         }
 
         private static Ray GetMouseRay()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
-        }
-
-        private bool MoveToCursor()
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            bool hasHit = Physics.Raycast(ray, out hit);
-            if (hasHit)
-            {
-                mover.MoveTo(hit.point, 1f);
-                fighter.Cancel();
-            }
-            return hasHit;
         }
     }
 }

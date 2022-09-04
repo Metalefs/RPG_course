@@ -202,6 +202,38 @@ PrefabInstance:
       propertyPath: rightHandTransform
       value: 
       objectReference: {fileID: 3526676155085454285}
+    - target: {fileID: 7242547507142677754, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
+      propertyPath: cursorMappings.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242547507142677754, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
+      propertyPath: cursorMappings.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242547507142677754, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
+      propertyPath: cursorMappings.Array.data[2].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242547507142677754, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
+      propertyPath: cursorMappings.Array.data[3].type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242547507142677754, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
+      propertyPath: cursorMappings.Array.data[0].texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 21628736160fcc9488493401da3ef621, type: 3}
+    - target: {fileID: 7242547507142677754, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
+      propertyPath: cursorMappings.Array.data[1].texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 44a99ee545fd8ba46a452b12c1f9378b, type: 3}
+    - target: {fileID: 7242547507142677754, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
+      propertyPath: cursorMappings.Array.data[2].texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 2d18e23e3ce249b4489b8bcdd02d3f48, type: 3}
+    - target: {fileID: 7242547507142677754, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
+      propertyPath: cursorMappings.Array.data[3].texture
+      value: 
+      objectReference: {fileID: 2800000, guid: f8c873f1e53e83f4aabf342d6be1dfc3, type: 3}
     m_RemovedComponents:
     - {fileID: 3075608880446245471, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
     - {fileID: 3406961034201508399, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
