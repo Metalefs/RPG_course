@@ -56,7 +56,6 @@ namespace RPG.SceneManagement
 
             yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(fadeInTime);
-            Debug.Log("Аштш");
             Destroy(gameObject);
         }
 

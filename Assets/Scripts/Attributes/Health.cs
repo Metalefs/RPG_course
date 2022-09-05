@@ -10,7 +10,7 @@ namespace RPG.Attributes
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float regenerationPercentage = 70;
-        public LazyValue<float> health;
+        [SerializeField] public LazyValue<float> health;
         bool isDead = false;
 
         public bool IsDead { get { return isDead; } }
@@ -71,7 +71,7 @@ namespace RPG.Attributes
 
         public object CaptureState()
         {
-            return health;
+            return health.value;
         }
 
         public void RestoreState(object state)

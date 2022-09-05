@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using RPG.Control;
+using RPG.Core;
 using RPG.Saving;
 using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class WeaponPickup : MonoBehaviour, ISaveable
+    public class WeaponPickup : MonoBehaviour, ISaveable, IRaycastable
     {
         [SerializeField] Weapon weapon = null;
         [SerializeField] float destroyDelay = 0f;
@@ -64,6 +66,20 @@ namespace RPG.Combat
             {
                 Destroy(gameObject);
             }
+        }
+
+        public bool HandleRaycast(PlayerController callingController)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Pickup(callingController.gameObject);
+            }
+            return true;
+        }
+
+        public CursorType GetCursorType()
+        {
+            return CursorType.Pickup;
         }
     }
 

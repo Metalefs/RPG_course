@@ -12,7 +12,7 @@ namespace RPG.Stats
         [SerializeField] GameObject levelUpParticle = null;
         [SerializeField] AudioClip levelUpSFX = null;
         [SerializeField] bool shouldUseModifiers = false;
-        LazyValue<int> currentLevel;
+        [SerializeField] LazyValue<int> currentLevel;
 
         public event Action onLevelUp;
         Experience experience;

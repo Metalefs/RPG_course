@@ -216,7 +216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7242547507142677754, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
       propertyPath: cursorMappings.Array.data[3].type
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7242547507142677754, guid: 2753da0ca2b06a947a33552ed98343d3, type: 3}
       propertyPath: cursorMappings.Array.data[0].texture

@@ -20,7 +20,7 @@ namespace RPG.Control
         Fighter fighter;
         Health health;
         Mover mover;
-        LazyValue<Vector3> guardPosition;
+        [SerializeField] LazyValue<Vector3> guardPosition;
         float timeSinceLastSawPlayer = Mathf.Infinity;
         float timeSinceArrivedAtWaypoint = Mathf.Infinity;
         int currentWaypointIndex = 0;
